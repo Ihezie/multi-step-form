@@ -32,7 +32,7 @@ const FormBody = () => {
         </header>
         <StepOne />
       </section>
-      <div className="bg-white absolute bottom-0 h-20 w-full flex items-center justify-between px-[5%] sm:bg-transparent sm:static sm:px-0 sm:h-auto lg:h-20">
+      <div className="bg-white fixed bottom-0 h-20 w-full flex items-center justify-between px-[5%] sm:bg-transparent sm:static sm:px-0 sm:h-auto lg:h-20">
         <button className="text-cool-gray font-medium cursor-pointer my-transition hover:text-marine-blue invisible">
           Go Back
         </button>
@@ -40,6 +40,7 @@ const FormBody = () => {
           Next Step
         </button>{" "}
       </div>
+      <div className="!fixed bottom-0">kdkd</div>
     </motion.section>
   );
 };
