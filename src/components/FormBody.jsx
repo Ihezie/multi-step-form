@@ -4,24 +4,37 @@ import StepOne from "./StepOne";
 const FormBody = () => {
   const formBodyVariants = {
     show: {
-      scale: 1,
+      scale: "var(--scale-visible, 1)",
       transition: {
         duration: 0.8,
         type: "spring",
       },
     },
     hide: {
-      scale: "var(--scale-hidden)",
+      scale: "var(--scale-hidden, 1)",
+    },
+  };
+  const buttonVariants = {
+    show: {
+      scale: "var(--scale-visible, 1)",
+      transition: {
+        delay: '0.5',
+        duration: 0.5,
+        type: "spring",
+      },
+    },
+    hide: {
+      scale: "var(--scale-hidden, 1)",
     },
   };
   return (
-    <motion.section
-      variants={formBodyVariants}
-      initial="hide"
-      animate="show"
-      className="sm:w-4/5 sm:mx-auto sm:bg-white sm:shadow-2xl sm:shadow-light-gray sm:relative sm:bottom-20 sm:rounded-xl sm:px-10 sm:pt-10 sm:pb-5 lg:static lg:bottom-0 lg:shadow-none lg:rounded-none lg:w-full lg:bg-transparent lg:pl-[15%] lg:pr-[13%] lg:pb-0 max-lg:[--scale-hidden:0%]"
-    >
-      <section className="w-[90%] mx-auto bg-white shadow-2xl shadow-light-gray rounded-lg px-6 py-8 relative bottom-20 sm:w-full sm:mx-0 sm:shadow-none sm:static sm:bottom-0 sm:rounded-none sm:bg-transparent sm:mb-12 sm:p-0 lg:mb-20">
+    <section className="sm:relative sm:w-4/5 sm:mx-auto sm:bottom-20 lg:bottom-0 lg:w-full lg:pl-[15%] lg:pr-[13%]">
+      <motion.section
+        variants={formBodyVariants}
+        initial="hide"
+        animate="show"
+        className="w-[90%] mx-auto bg-white shadow-2xl shadow-light-gray rounded-lg px-6 py-8 relative bottom-20 sm:w-full sm:bottom-0 sm:rounded-xl sm:px-10 sm:pt-10 sm:pb-32 lg:pb-0 lg:mb-20 lg:px-0 lg:static lg:shadow-none lg:rounded-none lg:bg-transparent max-lg:[--scale-hidden:0%] max-lg:[--scale-visible:100%]"
+      >
         <header className="mb-5 lg:mb-8">
           <h1 className="font-bold text-2xl text-marine-blue mb-3 lg:text-3xl">
             Personal info
@@ -31,16 +44,24 @@ const FormBody = () => {
           </h2>
         </header>
         <StepOne />
-      </section>
-      <div className="bg-white fixed bottom-0 h-20 w-full flex items-center justify-between px-[5%] sm:bg-transparent sm:static sm:px-0 sm:h-auto lg:h-20">
+      </motion.section>
+      <div className="bg-white absolute bottom-0 h-20 w-full flex items-center justify-between px-[5%] sm:bg-transparent sm:px-10 lg:static lg:px-0  origin-top">
         <button className="text-cool-gray font-medium cursor-pointer my-transition hover:text-marine-blue invisible">
           Go Back
         </button>
-        <button className="text-white bg-marine-blue w-28 py-3 rounded font-medium hover:bg-marine-blue/85 my-transition sm:rounded-lg">
+        <motion.button
+          variants={buttonVariants}
+          initial="hide"
+          animate="show"
+          className="text-white bg-marine-blue w-28 py-3 rounded font-medium sm:rounded-lg  max-lg:[--scale-hidden:0%] max-lg:[--scale-visible:100%]"
+          whileHover={{
+            backgroundColor: "rgba(2, 42, 90, 0.85)",
+          }}
+        >
           Next Step
-        </button>{" "}
+        </motion.button>
       </div>
-    </motion.section>
+    </section>
   );
 };
 export default FormBody;
