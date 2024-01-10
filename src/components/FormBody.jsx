@@ -15,12 +15,12 @@ const FormBody = () => {
     },
   };
   return (
-    <section className="">
+    <section className="sm:relative sm:w-4/5 sm:mx-auto sm:bottom-20 lg:bottom-0 lg:w-full">
       <motion.section
         variants={formBodyVariants}
         initial="hide"
         animate="show"
-        className="w-[90%] mx-auto bg-white shadow-2xl shadow-light-gray rounded-lg px-6 py-8 relative bottom-20 sm:w-4/5 sm:rounded-xl sm:px-10 sm:py-10 lg:static lg:bottom-0 lg:shadow-none lg:rounded-none lg:w-full lg:bg-transparent lg:pl-[15%] lg:pr-[13%] lg:pb-0 max-lg:[--scale-hidden:0%]"
+        className="w-[90%] mx-auto bg-white shadow-2xl shadow-light-gray rounded-lg px-6 py-8 relative bottom-20 sm:w-full sm:bottom-0 sm:rounded-xl sm:px-10 sm:pt-10 sm:pb-32 lg:pb-36 lg:static lg:shadow-none lg:rounded-none lg:w-full lg:bg-transparent lg:pl-[15%] lg:pr-[13%] max-lg:[--scale-hidden:0%]"
       >
         <header className="mb-5 lg:mb-8">
           <h1 className="font-bold text-2xl text-marine-blue mb-3 lg:text-3xl">
@@ -32,14 +32,19 @@ const FormBody = () => {
         </header>
         <StepOne />
       </motion.section>
-      <div className="bg-white absolute bottom-0 h-20 w-full flex items-center justify-between px-[5%] sm:bg-transparent">
+      <motion.div
+        variants={formBodyVariants}
+        initial="hide"
+        animate="show"
+        className="bg-white absolute bottom-0 h-20 w-full flex items-center justify-between px-[5%] sm:bg-transparent sm:px-10 lg:pr-[13%] max-lg:[--scale-hidden:0%] origin-top"
+      >
         <button className="text-cool-gray font-medium cursor-pointer my-transition hover:text-marine-blue invisible">
           Go Back
         </button>
         <button className="text-white bg-marine-blue w-28 py-3 rounded font-medium hover:bg-marine-blue/85 my-transition sm:rounded-lg">
           Next Step
         </button>
-      </div>
+      </motion.div>
     </section>
   );
 };
