@@ -40,7 +40,6 @@ const FormBody = () => {
           Next Step
         </button>{" "}
       </div>
-      <div className="!fixed bottom-0">kdkd</div>
     </motion.section>
   );
 };
