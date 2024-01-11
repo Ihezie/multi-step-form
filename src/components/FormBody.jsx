@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import StepOne from "./StepOne";
+import { useRef } from "react";
 
 const FormBody = () => {
   const formBodyVariants = {
@@ -18,7 +19,7 @@ const FormBody = () => {
     show: {
       scale: "var(--scale-visible, 1)",
       transition: {
-        delay: '0.5',
+        delay: "0.5",
         duration: 0.5,
         type: "spring",
       },
@@ -26,6 +27,14 @@ const FormBody = () => {
     hide: {
       scale: "var(--scale-hidden, 1)",
     },
+  };
+
+  const stepOneRef = useRef();
+  const handleClick = () => {
+    stepOneRef.current.requestSubmit()
+  };
+  const onSubmit = () => {
+    console.log("rice");
   };
   return (
     <section className="sm:relative sm:w-4/5 sm:mx-auto sm:bottom-20 lg:bottom-0 lg:w-full lg:pl-[15%] lg:pr-[13%]">
@@ -43,7 +52,7 @@ const FormBody = () => {
             Please provide your name, email address, and phone number.
           </h2>
         </header>
-        <StepOne />
+        <StepOne ref={stepOneRef} onSubmit={onSubmit} />
       </motion.section>
       <div className="bg-white absolute bottom-0 h-20 w-full flex items-center justify-between px-[5%] sm:bg-transparent sm:px-10 lg:static lg:px-0  origin-top">
         <button className="text-cool-gray font-medium cursor-pointer my-transition hover:text-marine-blue invisible">
@@ -53,6 +62,7 @@ const FormBody = () => {
           variants={buttonVariants}
           initial="hide"
           animate="show"
+          onClick={handleClick}
           className="text-white bg-marine-blue w-28 py-3 rounded font-medium sm:rounded-lg  max-lg:[--scale-hidden:0%] max-lg:[--scale-visible:100%]"
           whileHover={{
             backgroundColor: "rgba(2, 42, 90, 0.85)",
