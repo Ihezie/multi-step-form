@@ -10,7 +10,13 @@
     @apply bg-magnolia
   }
   #root{
-    @apply min-h-[667px] lg:min-h-[800px] relative h-screen
+    @apply min-h-[667px] lg:min-h-[800px] relative h-screen -z-30
+  }
+  main{
+    @apply -z-20
+  }
+  body{
+    @apply relative z-40
   }
 }
 @layer components {

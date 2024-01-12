@@ -49,7 +49,7 @@ const FormSteps = () => {
       initial="hide"
       animate="show"
       variants={containerVariants}
-      className="bg-sidebar-mobile min-h-[200px] h-[28vh] flex justify-center items-start pt-10 gap-4 bg-cover lg:h-full lg:bg-sidebar-desktop lg:flex-col lg:justify-start lg:rounded-xl lg:pl-8 lg:gap-8 max-lg:[--shown-opacity:1] max-lg:[--hidden-opacity:0]"
+      className="bg-sidebar-mobile min-h-[200px] h-[28vh] flex justify-center items-start pt-10 gap-4 bg-cover absolute w-full top-0 -z-10 lg:static lg:h-full lg:bg-sidebar-desktop lg:flex-col lg:justify-start lg:rounded-xl lg:pl-8 lg:gap-8 max-lg:[--shown-opacity:1] max-lg:[--hidden-opacity:0]"
     >
       {steps.map((step) => (
         <motion.div
