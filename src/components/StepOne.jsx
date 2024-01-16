@@ -1,15 +1,22 @@
 import { useForm } from "react-hook-form";
 import FormControls from "./FormControls";
+import { useFormData } from "../../FormContext";
 
 const StepOne = () => {
+  const [formData, setFormData] = useFormData();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-
+  } = useForm({
+    defaultValues: formData[0],
+  });
+  const onSubmit = (data) => {
+    setFormData({ ...formData, stepOne: data });
+    console.log(data);
+  };
   return (
-    <form className="text-marine-blue" onSubmit={handleSubmit()}>
+    <form className="text-marine-blue" onSubmit={handleSubmit(onSubmit)}>
       <div className={`flex justify-between items-center mb-2`}>
         <label htmlFor="name" className="text-sm">
           Name
