@@ -2,8 +2,9 @@ import advancedIcon from "../assets/images/icon-advanced.svg";
 import proIcon from "../assets/images/icon-pro.svg";
 import arcadeIcon from "../assets/images/icon-arcade.svg";
 import FormControls from "./FormControls";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useFormData } from "../../FormContext";
 
 const StepTwo = () => {
   const plans = [
@@ -32,20 +33,73 @@ const StepTwo = () => {
       },
     },
   ];
-  const [selectedPlan, setSelectedPlan] = useState(null);
-  const [billingType, setBillingType] = useState("monthly");
+  const [formData, setFormData] = useFormData();
+  const {
+    stepTwo: { globalBillingType, globalSelectedPlan },
+  } = formData;
+  const [localSelectedPlan, setLocalSelectedPlan] =
+    useState(globalSelectedPlan);
+  const [localBillingType, setLocalBillingType] = useState(globalBillingType);
 
-  const handleSubmit = (e) => {e.preventDefault()};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (localSelectedPlan) {
+      const price = plans.find((item) => item.name === localSelectedPlan).price[
+        localBillingType
+      ];
+
+      setFormData({
+        ...formData,
+        stepTwo: {
+          globalBillingType: localBillingType,
+          globalSelectedPlan: localSelectedPlan,
+          price,
+        },
+      });
+    } else {
+      setError(true);
+    }
+  };
+
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (localSelectedPlan) {
+      setError(false);
+    }
+  }, [localSelectedPlan]);
+
   return (
     <form className="text-marine-blue" onSubmit={handleSubmit}>
+      <AnimatePresence>
+        {error && (
+          <motion.p
+            initial={{
+              height: 0,
+              opacity: 0,
+            }}
+            animate={{
+              height: "auto",
+              opacity: 1,
+            }}
+            exit={{
+              height: 0,
+              opacity: 0,
+            }}
+            className="text-sm/8 overflow-hidden text-strawberry-red font-bold"
+          >
+            Please select a plan
+          </motion.p>
+        )}
+      </AnimatePresence>
       <fieldset className="lg:flex lg:gap-5">
         {plans.map((plan, index) => {
           return (
             <SinglePlan
               {...plan}
-              selectedPlan={selectedPlan}
-              setSelectedPlan={setSelectedPlan}
-              billingType={billingType}
+              localSelectedPlan={localSelectedPlan}
+              setLocalSelectedPlan={setLocalSelectedPlan}
+              localBillingType={localBillingType}
               key={index}
             />
           );
@@ -54,7 +108,7 @@ const StepTwo = () => {
       <div className="bg-magnolia mt-8 rounded-lg flex justify-between items-center px-[15%] h-14 font-medium text-cool-gray">
         <span
           className={`my-transition ${
-            billingType === "monthly" ? "text-marine-blue" : ""
+            localBillingType === "monthly" ? "text-marine-blue" : ""
           }`}
         >
           Monthly
@@ -62,24 +116,26 @@ const StepTwo = () => {
         <div
           className="w-10 h-5 bg-marine-blue rounded-full p-1 flex items-center cursor-pointer my-transition hover:scale-110"
           onClick={() => {
-            setBillingType(billingType === "monthly" ? "yearly" : "monthly");
+            setLocalBillingType(
+              localBillingType === "monthly" ? "yearly" : "monthly"
+            );
           }}
         >
           <div
             className={`h-[13px] w-[13px] bg-white rounded-full my-transition ${
-              billingType === "yearly" ? "translate-x-[146.15384%]" : ""
+              localBillingType === "yearly" ? "translate-x-[146.15384%]" : ""
             } `}
           ></div>
         </div>
         <span
           className={`my-transition  ${
-            billingType === "yearly" ? "text-marine-blue" : ""
+            localBillingType === "yearly" ? "text-marine-blue" : ""
           }`}
         >
           Yearly
         </span>
       </div>
-      <FormControls />
+      <FormControls goBackValue={'stepOne'}/>
     </form>
   );
 };
@@ -89,9 +145,9 @@ const SinglePlan = ({
   icon,
   name,
   price,
-  selectedPlan,
-  setSelectedPlan,
-  billingType,
+  localSelectedPlan,
+  setLocalSelectedPlan,
+  localBillingType,
 }) => {
   const radioRef = useRef();
   return (
@@ -103,19 +159,19 @@ const SinglePlan = ({
         id={name}
         value={name}
         className="absolute peer opacity-0"
-        checked={selectedPlan === name}
+        checked={localSelectedPlan === name}
         onChange={(e) => {
-          setSelectedPlan(e.target.value);
+          setLocalSelectedPlan(e.target.value);
         }}
       />
       <motion.div
         className="border border-light-gray px-4 flex py-4 items-center gap-4 rounded-lg sm:hover:border-purplish-blue cursor-pointer focus:border-purplish-blue my-transition peer-checked:bg-magnolia peer-checked:border-purplish-blue lg:flex-col lg:items-start lg:gap-12"
         onClick={() => {
-          if (selectedPlan === name) {
-            setSelectedPlan(null);
+          if (localSelectedPlan === name) {
+            setLocalSelectedPlan(null);
             radioRef.current.blur();
           } else {
-            setSelectedPlan(name);
+            setLocalSelectedPlan(name);
             radioRef.current.focus();
           }
         }}
@@ -129,12 +185,12 @@ const SinglePlan = ({
             {name}
           </label>
           <span className="text-cool-gray">
-            {billingType === "monthly"
-              ? `$${price[billingType]}/mo`
-              : `$${price[billingType]}/yr`}
+            {localBillingType === "monthly"
+              ? `$${price[localBillingType]}/mo`
+              : `$${price[localBillingType]}/yr`}
           </span>
           <AnimatePresence>
-            {billingType === "yearly" && (
+            {localBillingType === "yearly" && (
               <motion.p
                 initial={{
                   height: 0,

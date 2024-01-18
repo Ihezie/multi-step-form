@@ -4,11 +4,17 @@ const FormContext = createContext();
 
 const FormProvider = ({ children }) => {
   const initialValues = {
+    currentStep: "stepOne",
     stepOne: {
       name: "",
       email: "",
       phoneNumber: "",
     },
+    stepTwo: {
+      globalBillingType: 'monthly',
+      globalSelectedPlan: null,
+      price: null,
+    }
   };
   const [formData, setFormData] = useState(initialValues);
   return (

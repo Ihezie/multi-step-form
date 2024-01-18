@@ -9,11 +9,10 @@ const StepOne = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: formData[0],
+    defaultValues: formData.stepOne,
   });
   const onSubmit = (data) => {
-    setFormData({ ...formData, stepOne: data });
-    console.log(data);
+    setFormData({ ...formData, stepOne: data, currentStep: "stepTwo" });
   };
   return (
     <form className="text-marine-blue" onSubmit={handleSubmit(onSubmit)}>

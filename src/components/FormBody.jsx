@@ -1,6 +1,10 @@
+import { useFormData } from "../../FormContext";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 const FormBody = () => {
+  const [formData] = useFormData();
+  const { currentStep } = formData;
+
   const formStepsHeadings = {
     stepOne: {
       main: "Personal info",
@@ -27,7 +31,8 @@ const FormBody = () => {
         </h1>
         <h2 className="text-cool-gray">{formStepsHeadings.stepTwo.sub}</h2>
       </header>
-      <StepTwo />
+      {currentStep === "stepOne" && <StepOne />}
+      {currentStep === "stepTwo" && <StepTwo />}
     </section>
   );
 };
