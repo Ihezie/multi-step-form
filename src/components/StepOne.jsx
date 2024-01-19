@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import FormControls from "./FormControls";
-import { useFormData } from "../../FormContext";
+import { useFormData } from "../FormContext";
 
 const StepOne = () => {
   const [formData, setFormData] = useFormData();

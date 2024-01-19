@@ -1,23 +1,8 @@
-import { motion } from "framer-motion";
-import { useFormData } from "../../FormContext";
+import { useFormData } from "../FormContext";
 
-const FormControls = ({ goBackValue }) => {
+const FormControls = ({ goBackValue = "stepOne" }) => {
   const [formData, setFormData] = useFormData();
   const { currentStep } = formData;
-
-  const buttonVariants = {
-    show: {
-      scale: "var(--scale-visible, 1)",
-      transition: {
-        delay: 0.5,
-        duration: 0.5,
-        type: "spring",
-      },
-    },
-    hide: {
-      scale: "var(--scale-hidden, 1)",
-    },
-  };
   return (
     <div
       className={`bg-white absolute left-0 bottom-0 h-20 w-full flex items-center ${
@@ -37,7 +22,7 @@ const FormControls = ({ goBackValue }) => {
 
       <button
         type="submit"
-        className="text-white bg-marine-blue w-28 py-3 rounded font-medium sm:rounded-lg lg:w-32 max-lg:[--scale-hidden:0%] max-lg:[--scale-visible:100%] my-transition hover:bg-marine-blue/85"
+        className="text-white bg-marine-blue w-28 py-3 rounded font-medium sm:rounded-lg lg:w-32 my-transition hover:bg-marine-blue/85"
       >
         Next Step
       </button>

@@ -1,7 +1,7 @@
 import FormBody from "./components/FormBody";
 import FormStepButtons from "./components/FormStepButtons";
 import { motion } from "framer-motion";
-import FormProvider from "../FormContext";
+import FormProvider from "./FormContext";
 
 function App() {
   const variants = {

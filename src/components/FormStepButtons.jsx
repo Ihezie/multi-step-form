@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useFormData } from "../../FormContext";
+import { useFormData } from "../FormContext";
 
 const FormStepButtons = () => {
   const stepButtons = [

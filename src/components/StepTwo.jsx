@@ -4,7 +4,7 @@ import arcadeIcon from "../assets/images/icon-arcade.svg";
 import FormControls from "./FormControls";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useFormData } from "../../FormContext";
+import { useFormData } from "../FormContext";
 
 const StepTwo = () => {
   const plans = [
@@ -35,7 +35,8 @@ const StepTwo = () => {
   ];
   const [formData, setFormData] = useFormData();
   const {
-    stepTwo: { globalBillingType, globalSelectedPlan },
+    globalBillingType,
+    stepTwo: { globalSelectedPlan },
   } = formData;
   const [localSelectedPlan, setLocalSelectedPlan] =
     useState(globalSelectedPlan);
@@ -50,8 +51,9 @@ const StepTwo = () => {
 
       setFormData({
         ...formData,
+        currentStep: "stepThree",
+        globalBillingType: localBillingType,
         stepTwo: {
-          globalBillingType: localBillingType,
           globalSelectedPlan: localSelectedPlan,
           price,
         },
@@ -135,7 +137,7 @@ const StepTwo = () => {
           Yearly
         </span>
       </div>
-      <FormControls goBackValue={'stepOne'}/>
+      <FormControls goBackValue={"stepOne"} />
     </form>
   );
 };
@@ -165,7 +167,7 @@ const SinglePlan = ({
         }}
       />
       <motion.div
-        className="border border-light-gray px-4 flex py-4 items-center gap-4 rounded-lg sm:hover:border-purplish-blue cursor-pointer focus:border-purplish-blue my-transition peer-checked:bg-magnolia peer-checked:border-purplish-blue lg:flex-col lg:items-start lg:gap-12"
+        className="border border-light-gray p-4 flex items-center gap-4 rounded-lg sm:hover:border-purplish-blue cursor-pointer my-transition peer-checked:bg-magnolia peer-checked:border-purplish-blue lg:flex-col lg:items-start lg:gap-12"
         onClick={() => {
           if (localSelectedPlan === name) {
             setLocalSelectedPlan(null);
