@@ -5,7 +5,7 @@ const FormContext = createContext();
 const FormProvider = ({ children }) => {
   const initialValues = {
     globalBillingType: "monthly",
-    currentStep: "stepThree",
+    currentStep: "stepOne",
     isFinished: false,
     stepOne: {
       name: "",

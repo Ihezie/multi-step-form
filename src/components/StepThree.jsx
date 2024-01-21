@@ -107,6 +107,7 @@ const SingleAddOn = ({
             name={title}
             id={title}
             checked={addOnData[index].selected}
+            readOnly
           />
           <img
             src={checkmark}
