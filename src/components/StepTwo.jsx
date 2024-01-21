@@ -72,7 +72,10 @@ const StepTwo = () => {
   }, [localSelectedPlan]);
 
   return (
-    <form className="text-marine-blue" onSubmit={handleSubmit}>
+    <form
+      className="text-marine-blue lg:min-h-[435px] lg:relative"
+      onSubmit={handleSubmit}
+    >
       <AnimatePresence>
         {error && (
           <motion.p

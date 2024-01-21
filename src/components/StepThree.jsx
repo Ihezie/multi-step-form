@@ -26,12 +26,16 @@ const StepThree = () => {
   };
   useEffect(() => {
     const atLeastOneAddOn = addOnData.some((item) => item.selected);
-    if(atLeastOneAddOn){
-        setError(false)
+    if (atLeastOneAddOn) {
+      setError(false);
     }
   }, [addOnData]);
+  
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className="text-marine-blue lg:min-h-[435px] lg:relative"
+    >
       <AnimatePresence>
         {error && (
           <motion.p
@@ -103,7 +107,6 @@ const SingleAddOn = ({
             name={title}
             id={title}
             checked={addOnData[index].selected}
-            readOnly
           />
           <img
             src={checkmark}
@@ -113,7 +116,7 @@ const SingleAddOn = ({
             }`}
           />
         </div>
-        <div>
+        <div> 
           <label className="font-medium cursor-pointer" htmlFor={title}>
             {title}
           </label>

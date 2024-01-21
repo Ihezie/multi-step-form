@@ -6,6 +6,7 @@ const FormProvider = ({ children }) => {
   const initialValues = {
     globalBillingType: "monthly",
     currentStep: "stepThree",
+    isFinished: false,
     stepOne: {
       name: "",
       email: "",
@@ -13,7 +14,7 @@ const FormProvider = ({ children }) => {
     },
     stepTwo: {
       globalSelectedPlan: null,
-      price: null,
+      price: 0,
     },
     stepThree: [
       {

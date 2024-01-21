@@ -15,7 +15,10 @@ const StepOne = () => {
     setFormData({ ...formData, stepOne: data, currentStep: "stepTwo" });
   };
   return (
-    <form className="text-marine-blue" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="text-marine-blue lg:min-h-[435px] lg:relative"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <div className={`flex justify-between items-center mb-2`}>
         <label htmlFor="name" className="text-sm">
           Name

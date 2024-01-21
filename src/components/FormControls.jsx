@@ -7,10 +7,11 @@ const FormControls = ({ goBackValue = "stepOne" }) => {
     <div
       className={`bg-white absolute left-0 bottom-0 h-20 w-full flex items-center ${
         currentStep !== "stepOne" ? "justify-between" : "justify-end"
-      } px-[5%] sm:bg-transparent sm:px-0 sm:static sm:mt-10 sm:h-auto lg:h-20 lg:mt-16`}
+      } px-[5%] sm:bg-transparent sm:px-0 sm:static sm:mt-10 sm:h-auto lg:absolute lg:h-20`}
     >
       {currentStep !== "stepOne" && (
         <button
+          type="button"
           onClick={() => {
             setFormData({ ...formData, currentStep: goBackValue });
           }}
@@ -22,9 +23,18 @@ const FormControls = ({ goBackValue = "stepOne" }) => {
 
       <button
         type="submit"
-        className="text-white bg-marine-blue w-28 py-3 rounded font-medium sm:rounded-lg lg:w-32 my-transition hover:bg-marine-blue/85"
+        className={`text-white ${
+          currentStep === "stepFour"
+            ? "bg-purplish-blue hover:bg-purplish-blue/60"
+            : "bg-marine-blue hover:bg-marine-blue/85"
+        }  w-28 py-3 rounded font-medium sm:rounded-lg lg:w-32 my-transition`}
+        onClick={() => {
+          if (currentStep === "stepFour") {
+            setFormData({ ...formData, isFinished: true });
+          }
+        }}
       >
-        Next Step
+        {currentStep === "stepFour" ? "Confirm" : "Next Step"}
       </button>
     </div>
   );
