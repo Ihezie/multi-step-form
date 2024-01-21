@@ -37,8 +37,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [https://github.com/Ihezie/multi-step-form.git](https://github.com/Ihezie/multi-step-form.git)
+- Live Site URL: [https://candid-empanada-2ade87.netlify.app/](https://candid-empanada-2ade87.netlify.app/)
 
 ## My process
 
